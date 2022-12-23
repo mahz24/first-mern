@@ -8,10 +8,22 @@ env.config();
 const app: Express = express();
 const port: string | number = process.env.PORT || 8000;
 
-// Define firts route
+//Define firts route
 app.get("/", (req: Request, res: Response) => {
-  // Send hello word
-  res.send("welcome to my API restful with Express + Nodemon + Jest + TS + Swagger + Mongoose");
+  let name: any = req.query.name;
+  if (name == undefined) name = "anonimo";
+  const message : string = `Hola, ${name}`
+  const json:object = {"data": {
+    "message":message
+  }}
+  res.status(200).send(json);
+});
+
+app.get("/", (req: Request, res: Response) => {
+  const json:object = {"data": {
+    "message":"Goodby, world"
+  }}
+  res.status(200).send(json);
 });
 
 // Execute app and listen request
